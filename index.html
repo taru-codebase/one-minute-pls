@@ -25,7 +25,7 @@
         }
 
         .container {
-            max-width: 800px;
+            max-width: 900px; /* Widened slightly for better 15-image grid */
             width: 100%;
         }
 
@@ -103,6 +103,127 @@
             font-size: 2rem;
             text-shadow: 0 0 15px rgba(255, 158, 235, 0.5);
         }
+
+        /* --- DOWN MEMORY LANE SECTION (Updated for 15 Images) --- */
+        .memory-lane {
+            margin: 60px 0;
+            padding: 40px 0;
+            border-top: 1px dashed rgba(255, 255, 255, 0.1);
+        }
+
+        .memory-lane h2 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: #fff;
+            font-weight: normal;
+        }
+
+        .memory-grid {
+            display: grid;
+            /* Creates a responsive grid that fits as many 150px images as possible per row */
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 0 auto;
+        }
+
+        .memory-grid img {
+            width: 100%;
+            height: 150px; /* Uniform height for thumbnails */
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            background-color: #222;
+            border: 2px solid transparent;
+        }
+
+        .memory-grid img:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 8px 20px rgba(224, 170, 255, 0.3);
+            border-color: #e0aaff;
+        }
+
+        /* --- UPGRADED: LIGHTBOX GALLERY MODE --- */
+        .lightbox-overlay {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox-overlay.open {
+            display: flex;
+            opacity: 1;
+        }
+
+        /* Container for the image and nav buttons */
+        .lightbox-container {
+            position: relative;
+            max-width: 90%;
+            max-height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 90vh;
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.8);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* General Navigation Button Styling (Close, Prev, Next) */
+        .lb-btn {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.5);
+            color: #ff9eeb;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            z-index: 2001;
+        }
+
+        .lb-btn:hover {
+            background: rgba(224, 170, 255, 0.2);
+            color: #fff;
+        }
+
+        /* Close Button (Top Right) */
+        .lightbox-close {
+            top: -40px;
+            right: -10px;
+            font-size: 2rem;
+            width: 40px;
+            height: 40px;
+        }
+
+        /* Prev/Next Navigation (Sides) */
+        .lb-nav {
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2.5rem;
+            width: 60px;
+            height: 60px;
+            font-family: Arial, sans-serif; /* For better arrow rendering */
+        }
+
+        .lb-prev { left: -70px; }
+        .lb-next { right: -70px; }
 
         /* --- THE EASTER EGG BUTTON --- */
         .reveal-btn {
@@ -244,22 +365,143 @@
             font-style: normal;
         }
 
-        /* Mobile Responsiveness */
+        /* --- Photobooth Trigger and Modal Styles --- */
+        .photobooth-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+            color: #e0aaff;
+            font-size: 1rem;
+            cursor: pointer;
+            padding: 15px 30px;
+            margin-top: 50px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        .photobooth-btn::before {
+            content: "photobooth";
+        }
+
+        .photobooth-btn:hover {
+            content: " ";
+            background: #1a1a25;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(224, 170, 255, 0.3);
+            border-color: #ff9eeb;
+            color: transparent;
+        }
+
+        .photobooth-btn:hover::before {
+            content: "a section for someone special";
+            color: #ff9eeb;
+            font-style: italic;
+            text-transform: none;
+            letter-spacing: normal;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+        }
+
+        .modal-overlay {
+            display: none; 
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto; 
+            padding: 40px 0;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .modal-overlay.open {
+            display: flex;
+            opacity: 1;
+        }
+
+        .close-modal {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            color: #ff9eeb;
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 1001;
+            transition: color 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: #fff;
+        }
+
+        .modal-content {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            max-width: 1000px;
+            padding: 20px;
+            position: relative;
+        }
+
+        .modal-content .polaroid {
+            background: #fff;
+            padding: 10px 10px 25px 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
+            transition: transform 0.3s ease, z-index 0.3s ease;
+            width: 230px; 
+            position: relative;
+        }
+
+        .modal-content .polaroid img {
+            width: 100%;
+            height: 230px; 
+            object-fit: cover;
+            display: block;
+            background-color: #222; 
+        }
+
+        .modal-content .polaroid:nth-child(1) { transform: rotate(-6deg); z-index: 1; }
+        .modal-content .polaroid:nth-child(2) { transform: rotate(4deg) translateY(-10px); z-index: 2; }
+        .modal-content .polaroid:nth-child(3) { transform: rotate(-3deg); z-index: 1; }
+        .modal-content .polaroid:nth-child(4) { transform: rotate(5deg) translateY(-15px); z-index: 2; }
+        .modal-content .polaroid:nth-child(5) { transform: rotate(-4deg) translateY(5px); z-index: 1; }
+        .modal-content .polaroid:nth-child(6) { transform: rotate(7deg) translateY(10px); z-index: 3; }
+        .modal-content .polaroid:nth-child(7) { transform: rotate(-2deg) translateY(-8px); z-index: 2; }
+
+        .modal-content .polaroid:hover {
+            transform: scale(1.1) rotate(0deg);
+            z-index: 10;
+            box-shadow: 0 10px 25px rgba(224, 170, 255, 0.3);
+        }
+
+        /* Mobile Responsiveness Gallery Updates */
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            h1 { font-size: 2rem; }
+            .memory-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px;}
+            .memory-grid img { height: 120px; }
+            
+            /* Hide side nav on mobile, she can swipe or click image */
+            .lb-nav { display: none; } 
+            .lightbox-close { top: 10px; right: 10px; background: rgba(0,0,0,0.7); border-radius: 50%;}
+        }
+        
         @media (max-width: 600px) {
-            .time-block {
-                min-width: 45%;
-                padding: 15px;
-            }
-            .time-value {
-                font-size: 2.5rem;
-            }
-            h1 {
-                font-size: 1.8rem;
-            }
-            .coupon {
-                width: 100%;
-                max-width: 300px;
-            }
+            .time-block { min-width: 45%; padding: 15px; }
+            .time-value { font-size: 2.5rem; }
+            .coupon { width: 100%; max-width: 300px; }
+            .modal-content .polaroid { width: 150px; }
+            .modal-content .polaroid img { height: 150px; }
         }
     </style>
 </head>
@@ -296,6 +538,27 @@
             <p>We've been building our story for exactly <br><span id="total-minutes" class="highlight-minute">0</span><br> total minutes.</p>
         </div>
 
+        <div class="memory-lane">
+            <h2>Down Memory Lane</h2>
+            <div class="memory-grid" id="memoryGrid">
+                <img src="mem1.jpeg" alt="Memory" onclick="openGallery(0)">
+                <img src="mem2.jpeg" alt="Memory" onclick="openGallery(1)">
+                <img src="mem3.jpeg" alt="Memory" onclick="openGallery(2)">
+                <img src="mem4.jpeg" alt="Memory" onclick="openGallery(3)">
+                <img src="mem5.jpeg" alt="Memory" onclick="openGallery(4)">
+                <img src="mem6.jpeg" alt="Memory" onclick="openGallery(5)">
+                <img src="mem7.jpeg" alt="Memory" onclick="openGallery(6)">
+                <img src="mem8.jpeg" alt="Memory" onclick="openGallery(7)">
+                <img src="mem9.jpeg" alt="Memory" onclick="openGallery(8)">
+                <img src="mem10.jpeg" alt="Memory" onclick="openGallery(9)">
+                <img src="mem11.jpeg" alt="Memory" onclick="openGallery(10)">
+                <img src="mem12.jpeg" alt="Memory" onclick="openGallery(11)">
+                <img src="mem13.jpeg" alt="Memory" onclick="openGallery(12)">
+                <img src="mem14.jpeg" alt="Memory" onclick="openGallery(13)">
+                <img src="mem15.jpeg" alt="Memory" onclick="openGallery(14)">
+            </div>
+        </div>
+
         <button class="reveal-btn" onclick="revealSecrets()">wait, there's more...</button>
 
         <div class="favours-section" id="secret-favours">
@@ -327,6 +590,9 @@
                 </div>
 
             </div>
+            
+            <button class="photobooth-btn" id="openBooth" onclick="openPhotoBooth()"></button>
+            
         </div>
 
         <div id="fake-footer" class="fake-footer" onclick="revealHeartfeltMessage()">
@@ -335,8 +601,31 @@
 
     </div>
 
+    <div class="modal-overlay" id="photoModal">
+        <div class="close-modal" id="closeBooth" onclick="closePhotoBooth()">&times;</div>
+        <div class="modal-content">
+            <div class="polaroid"><img src="pic1.jpeg" alt="Memory 1"></div>
+            <div class="polaroid"><img src="pic2.jpeg" alt="Memory 2"></div>
+            <div class="polaroid"><img src="pic3.jpeg" alt="Memory 3"></div>
+            <div class="polaroid"><img src="pic4.jpeg" alt="Memory 4"></div>
+            <div class="polaroid"><img src="pic5.jpeg" alt="Memory 5"></div>
+            <div class="polaroid"><img src="pic6.jpeg" alt="Memory 6"></div>
+            <div class="polaroid"><img src="pic7.jpeg" alt="Memory 7"></div>
+        </div>
+    </div>
+
+    <div class="lightbox-overlay" id="lightbox">
+        <div class="lightbox-container">
+            <button class="lb-btn lightbox-close" onclick="closeGallery()">&times;</button>
+            
+            <button class="lb-btn lb-nav lb-prev" onclick="changeImage(-1)">&#10094;</button>
+            <button class="lb-btn lb-nav lb-next" onclick="changeImage(1)">&#10095;</button>
+            
+            <img class="lightbox-img" id="lightbox-img" src="" alt="Expanded Memory" onclick="changeImage(1)">
+        </div>
+    </div>
+
     <script>
-        // Set the exact start date: April 30, 2024 at Midnight
         const start = new Date('April 30, 2024 00:00:00');
 
         function updateCounter() {
@@ -387,11 +676,21 @@
             element.classList.add('redeemed');
         }
 
-        // New function to handle the hidden footer message
+        function openPhotoBooth() {
+            const modal = document.getElementById('photoModal');
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closePhotoBooth() {
+            const modal = document.getElementById('photoModal');
+            modal.classList.remove('open');
+            document.body.style.overflow = ''; 
+        }
+
         function revealHeartfeltMessage() {
             const footer = document.getElementById('fake-footer');
             
-            // Only run this once
             if (!footer.classList.contains('unlocked')) {
                 footer.classList.add('unlocked');
                 footer.innerHTML = `
@@ -399,6 +698,76 @@
                     <span class="signature">— Yours</span>
                 `;
             }
+        }
+
+        // --- UPGRADED: Memory Lane Gallery Mode Logic ---
+        
+        let currentImageIndex = 0;
+        const images = [];
+        // Populate image sources array (mem1.jpeg to mem15.jpeg)
+        for(let i = 1; i <= 15; i++) {
+            images.push(`mem${i}.jpeg`);
+        }
+
+        function openGallery(index) {
+            currentImageIndex = index;
+            const lightbox = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            
+            // Set initial image
+            img.src = images[currentImageIndex];
+            
+            lightbox.classList.add('open');
+            document.body.style.overflow = 'hidden'; // Prevents scrolling behind
+
+            // Add keyboard support (arrows and escape)
+            document.addEventListener('keydown', handleKeyboard);
+            
+            // Allow closing by clicking background
+            lightbox.addEventListener('click', handleBackgroundClick);
+        }
+
+        function closeGallery() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('open');
+            document.body.style.overflow = '';
+            
+            // Remove event listeners to clean up
+            document.removeEventListener('keydown', handleKeyboard);
+            lightbox.removeEventListener('click', handleBackgroundClick);
+        }
+
+        function changeImage(direction) {
+            currentImageIndex += direction;
+            
+            // Loop functionality
+            if (currentImageIndex >= images.length) {
+                currentImageIndex = 0; // Loop back to start
+            } else if (currentImageIndex < 0) {
+                currentImageIndex = images.length - 1; // Loop back to end
+            }
+            
+            const img = document.getElementById('lightbox-img');
+            // Add simple fade effect via JS setting source
+            img.style.opacity = 0;
+            setTimeout(() => {
+                img.src = images[currentImageIndex];
+                img.style.opacity = 1;
+            }, 100); // Short delay for fade
+        }
+
+        // Helper: Close if clicking the dark overlay, not the image or buttons
+        function handleBackgroundClick(e) {
+            if (e.target.classList.contains('lightbox-container') || e.target.classList.contains('lightbox-overlay')) {
+                closeGallery();
+            }
+        }
+
+        // Helper: Keyboard navigation
+        function handleKeyboard(e) {
+            if (e.key === "ArrowRight") changeImage(1);
+            if (e.key === "ArrowLeft") changeImage(-1);
+            if (e.key === "Escape") closeGallery();
         }
 
         updateCounter();
