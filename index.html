@@ -89,7 +89,7 @@
             margin-top: 40px;
             padding-top: 40px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            margin-bottom: 50px;
+            margin-bottom: 40px;
         }
 
         .total-minutes-box p {
@@ -104,10 +104,41 @@
             text-shadow: 0 0 15px rgba(255, 158, 235, 0.5);
         }
 
-        /* --- NEW: Interactive Favours/Coupons --- */
+        /* --- THE EASTER EGG BUTTON --- */
+        .reveal-btn {
+            background: transparent;
+            border: none;
+            color: #444;
+            font-size: 0.9rem;
+            cursor: pointer;
+            margin-top: 20px;
+            font-style: italic;
+            transition: color 0.3s ease;
+        }
+
+        .reveal-btn:hover {
+            color: #e0aaff;
+            text-shadow: 0 0 5px rgba(224, 170, 255, 0.5);
+        }
+
+        /* --- Interactive Favours Section (Hidden by Default) --- */
+        .favours-section {
+            display: none;
+            opacity: 0;
+            margin-top: 50px;
+            padding-top: 40px;
+            border-top: 1px dashed rgba(255, 255, 255, 0.1);
+            transition: opacity 1s ease-in-out;
+        }
+
+        .favours-section.visible {
+            display: block;
+            opacity: 1;
+        }
+
         .favours-section h2 {
             font-size: 1.8rem;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             color: #fff;
             font-weight: normal;
         }
@@ -129,6 +160,7 @@
             position: relative;
             transition: all 0.3s ease;
             overflow: hidden;
+            text-align: center;
         }
 
         .coupon:hover {
@@ -229,7 +261,9 @@
             <p>We've been building our story for exactly <br><span id="total-minutes" class="highlight-minute">0</span><br> total minutes.</p>
         </div>
 
-        <div class="favours-section">
+        <button class="reveal-btn" onclick="revealSecrets()">wait, there's more...</button>
+
+        <div class="favours-section" id="secret-favours">
             <h2>Tap a ticket to redeem...</h2>
             <div class="coupon-grid">
                 
@@ -301,6 +335,20 @@
             document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
             document.getElementById("minutes").innerText = minutes.toString().padStart(2, '0');
             document.getElementById("seconds").innerText = seconds.toString().padStart(2, '0');
+        }
+
+        // Handle the secret reveal button
+        function revealSecrets() {
+            const section = document.getElementById('secret-favours');
+            const btn = document.querySelector('.reveal-btn');
+            
+            section.classList.add('visible');
+            btn.style.display = 'none'; // Hides the "wait, there's more..." text after clicking
+            
+            // Smoothly scroll down so she sees it
+            setTimeout(() => {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
         }
 
         // Handle the coupon clicking
