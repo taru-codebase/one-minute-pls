@@ -25,7 +25,7 @@
         }
 
         .container {
-            max-width: 900px; /* Widened slightly for better 15-image grid */
+            max-width: 900px;
             width: 100%;
         }
 
@@ -104,127 +104,6 @@
             text-shadow: 0 0 15px rgba(255, 158, 235, 0.5);
         }
 
-        /* --- DOWN MEMORY LANE SECTION (Updated for 15 Images) --- */
-        .memory-lane {
-            margin: 60px 0;
-            padding: 40px 0;
-            border-top: 1px dashed rgba(255, 255, 255, 0.1);
-        }
-
-        .memory-lane h2 {
-            font-size: 1.8rem;
-            margin-bottom: 30px;
-            color: #fff;
-            font-weight: normal;
-        }
-
-        .memory-grid {
-            display: grid;
-            /* Creates a responsive grid that fits as many 150px images as possible per row */
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin: 0 auto;
-        }
-
-        .memory-grid img {
-            width: 100%;
-            height: 150px; /* Uniform height for thumbnails */
-            object-fit: cover;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            background-color: #222;
-            border: 2px solid transparent;
-        }
-
-        .memory-grid img:hover {
-            transform: translateY(-5px) scale(1.03);
-            box-shadow: 0 8px 20px rgba(224, 170, 255, 0.3);
-            border-color: #e0aaff;
-        }
-
-        /* --- UPGRADED: LIGHTBOX GALLERY MODE --- */
-        .lightbox-overlay {
-            display: none; /* Hidden by default */
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.95);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .lightbox-overlay.open {
-            display: flex;
-            opacity: 1;
-        }
-
-        /* Container for the image and nav buttons */
-        .lightbox-container {
-            position: relative;
-            max-width: 90%;
-            max-height: 90vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .lightbox-img {
-            max-width: 100%;
-            max-height: 90vh;
-            border-radius: 8px;
-            box-shadow: 0 0 30px rgba(0,0,0,0.8);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-        }
-
-        /* General Navigation Button Styling (Close, Prev, Next) */
-        .lb-btn {
-            position: absolute;
-            background: rgba(0, 0, 0, 0.5);
-            color: #ff9eeb;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 50%;
-            z-index: 2001;
-        }
-
-        .lb-btn:hover {
-            background: rgba(224, 170, 255, 0.2);
-            color: #fff;
-        }
-
-        /* Close Button (Top Right) */
-        .lightbox-close {
-            top: -40px;
-            right: -10px;
-            font-size: 2rem;
-            width: 40px;
-            height: 40px;
-        }
-
-        /* Prev/Next Navigation (Sides) */
-        .lb-nav {
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 2.5rem;
-            width: 60px;
-            height: 60px;
-            font-family: Arial, sans-serif; /* For better arrow rendering */
-        }
-
-        .lb-prev { left: -70px; }
-        .lb-next { right: -70px; }
-
         /* --- THE EASTER EGG BUTTON --- */
         .reveal-btn {
             background: transparent;
@@ -242,7 +121,7 @@
             text-shadow: 0 0 5px rgba(224, 170, 255, 0.5);
         }
 
-        /* --- Interactive Favours Section (Hidden by Default) --- */
+        /* --- Interactive Favours Section --- */
         .favours-section {
             display: none;
             opacity: 0;
@@ -329,64 +208,31 @@
             display: block;
         }
 
-        /* --- THE FAKE FOOTER MESSAGE --- */
-        .fake-footer {
-            margin-top: 80px;
-            color: #333; 
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: all 0.8s ease;
-            padding: 20px;
+        /* --- THE DUAL SECRET BUTTONS --- */
+        .secret-buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 60px;
+            flex-wrap: wrap;
         }
 
-        .fake-footer:hover {
-            color: #666;
-        }
-
-        .fake-footer.unlocked {
-            color: #eaeaea;
-            font-size: 1.1rem;
-            font-style: italic;
-            line-height: 1.6;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 10px;
-            border-left: 3px solid #ff9eeb;
-            padding: 30px;
-            text-align: left;
-            cursor: default;
-        }
-
-        .signature {
-            color: #ff9eeb;
-            margin-top: 15px;
-            font-weight: bold;
-            text-align: right;
-            display: block;
-            font-style: normal;
-        }
-
-        /* --- Photobooth Trigger and Modal Styles --- */
-        .photobooth-btn {
+        .secret-btn {
             background: rgba(255, 255, 255, 0.03);
             border: 1px dashed rgba(255, 255, 255, 0.1);
             color: #e0aaff;
             font-size: 1rem;
             cursor: pointer;
             padding: 15px 30px;
-            margin-top: 50px;
             border-radius: 5px;
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 2px;
             position: relative;
+            min-width: 250px;
         }
 
-        .photobooth-btn::before {
-            content: "photobooth";
-        }
-
-        .photobooth-btn:hover {
-            content: " ";
+        .secret-btn:hover {
             background: #1a1a25;
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(224, 170, 255, 0.3);
@@ -394,6 +240,8 @@
             color: transparent;
         }
 
+        /* Photobooth Button specific text */
+        .photobooth-btn::before { content: "photobooth"; }
         .photobooth-btn:hover::before {
             content: "a section for someone special";
             color: #ff9eeb;
@@ -406,6 +254,68 @@
             white-space: nowrap;
         }
 
+        /* Memory Lane Button specific text */
+        .memory-btn::before { content: "memory lane"; }
+        .memory-btn:hover::before {
+            content: "for all the days before today";
+            color: #ff9eeb;
+            font-style: italic;
+            text-transform: none;
+            letter-spacing: normal;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+        }
+
+        /* --- MEMORY LANE GRID (Hidden until button is clicked) --- */
+        .memory-lane-section {
+            display: none; /* Hidden initially */
+            opacity: 0;
+            margin-top: 50px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            transition: opacity 1s ease-in-out;
+        }
+
+        .memory-lane-section.visible {
+            display: block;
+            opacity: 1;
+        }
+
+        .memory-lane-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: #fff;
+            font-weight: normal;
+        }
+
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 0 auto;
+        }
+
+        .memory-grid img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            background-color: #222;
+            border: 2px solid transparent;
+        }
+
+        .memory-grid img:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 8px 20px rgba(224, 170, 255, 0.3);
+            border-color: #e0aaff;
+        }
+
+        /* --- PHOTOBOOTH MODAL --- */
         .modal-overlay {
             display: none; 
             position: fixed;
@@ -439,9 +349,7 @@
             transition: color 0.3s ease;
         }
 
-        .close-modal:hover {
-            color: #fff;
-        }
+        .close-modal:hover { color: #fff; }
 
         .modal-content {
             display: flex;
@@ -470,6 +378,7 @@
             background-color: #222; 
         }
 
+        /* Polaroid scattering */
         .modal-content .polaroid:nth-child(1) { transform: rotate(-6deg); z-index: 1; }
         .modal-content .polaroid:nth-child(2) { transform: rotate(4deg) translateY(-10px); z-index: 2; }
         .modal-content .polaroid:nth-child(3) { transform: rotate(-3deg); z-index: 1; }
@@ -484,22 +393,117 @@
             box-shadow: 0 10px 25px rgba(224, 170, 255, 0.3);
         }
 
-        /* Mobile Responsiveness Gallery Updates */
+        /* --- LIGHTBOX GALLERY MODE --- */
+        .lightbox-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox-overlay.open {
+            display: flex;
+            opacity: 1;
+        }
+
+        .lightbox-container {
+            position: relative;
+            max-width: 90%;
+            max-height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 90vh;
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.8);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: opacity 0.2s ease;
+        }
+
+        .lb-btn {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.5);
+            color: #ff9eeb;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            z-index: 2001;
+        }
+
+        .lb-btn:hover {
+            background: rgba(224, 170, 255, 0.2);
+            color: #fff;
+        }
+
+        .lightbox-close { top: -40px; right: -10px; font-size: 2rem; width: 40px; height: 40px; }
+        .lb-nav { top: 50%; transform: translateY(-50%); font-size: 2.5rem; width: 60px; height: 60px; }
+        .lb-prev { left: -70px; }
+        .lb-next { right: -70px; }
+
+        /* --- THE FAKE FOOTER MESSAGE --- */
+        .fake-footer {
+            margin-top: 80px;
+            color: #333; 
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.8s ease;
+            padding: 20px;
+        }
+
+        .fake-footer:hover { color: #666; }
+
+        .fake-footer.unlocked {
+            color: #eaeaea;
+            font-size: 1.1rem;
+            font-style: italic;
+            line-height: 1.6;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 10px;
+            border-left: 3px solid #ff9eeb;
+            padding: 30px;
+            text-align: left;
+            cursor: default;
+        }
+
+        .signature {
+            color: #ff9eeb;
+            margin-top: 15px;
+            font-weight: bold;
+            text-align: right;
+            display: block;
+            font-style: normal;
+        }
+
+        /* Mobile Responsiveness Updates */
         @media (max-width: 768px) {
-            .container { padding: 20px; }
-            h1 { font-size: 2rem; }
             .memory-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px;}
             .memory-grid img { height: 120px; }
-            
-            /* Hide side nav on mobile, she can swipe or click image */
             .lb-nav { display: none; } 
-            .lightbox-close { top: 10px; right: 10px; background: rgba(0,0,0,0.7); border-radius: 50%;}
+            .lightbox-close { top: 10px; right: 10px; background: rgba(0,0,0,0.7); }
         }
         
         @media (max-width: 600px) {
             .time-block { min-width: 45%; padding: 15px; }
             .time-value { font-size: 2.5rem; }
             .coupon { width: 100%; max-width: 300px; }
+            .secret-btn::before { font-size: 0.8rem; }
+            .secret-btn:hover::before { font-size: 0.7rem; }
             .modal-content .polaroid { width: 150px; }
             .modal-content .polaroid img { height: 150px; }
         }
@@ -538,27 +542,6 @@
             <p>We've been building our story for exactly <br><span id="total-minutes" class="highlight-minute">0</span><br> total minutes.</p>
         </div>
 
-        <div class="memory-lane">
-            <h2>Down Memory Lane</h2>
-            <div class="memory-grid" id="memoryGrid">
-                <img src="mem1.jpeg" alt="Memory" onclick="openGallery(0)">
-                <img src="mem2.jpeg" alt="Memory" onclick="openGallery(1)">
-                <img src="mem3.jpeg" alt="Memory" onclick="openGallery(2)">
-                <img src="mem4.jpeg" alt="Memory" onclick="openGallery(3)">
-                <img src="mem5.jpeg" alt="Memory" onclick="openGallery(4)">
-                <img src="mem6.jpeg" alt="Memory" onclick="openGallery(5)">
-                <img src="mem7.jpeg" alt="Memory" onclick="openGallery(6)">
-                <img src="mem8.jpeg" alt="Memory" onclick="openGallery(7)">
-                <img src="mem9.jpeg" alt="Memory" onclick="openGallery(8)">
-                <img src="mem10.jpeg" alt="Memory" onclick="openGallery(9)">
-                <img src="mem11.jpeg" alt="Memory" onclick="openGallery(10)">
-                <img src="mem12.jpeg" alt="Memory" onclick="openGallery(11)">
-                <img src="mem13.jpeg" alt="Memory" onclick="openGallery(12)">
-                <img src="mem14.jpeg" alt="Memory" onclick="openGallery(13)">
-                <img src="mem15.jpeg" alt="Memory" onclick="openGallery(14)">
-            </div>
-        </div>
-
         <button class="reveal-btn" onclick="revealSecrets()">wait, there's more...</button>
 
         <div class="favours-section" id="secret-favours">
@@ -591,7 +574,31 @@
 
             </div>
             
-            <button class="photobooth-btn" id="openBooth" onclick="openPhotoBooth()"></button>
+            <div class="secret-buttons-container">
+                <button class="secret-btn photobooth-btn" onclick="openPhotoBooth()"></button>
+                <button class="secret-btn memory-btn" id="memBtn" onclick="revealMemoryLane()"></button>
+            </div>
+
+            <div class="memory-lane-section" id="memory-lane-grid">
+                <h2>Down Memory Lane</h2>
+                <div class="memory-grid">
+                    <img src="mem1.jpeg" alt="Memory" onclick="openGallery(0)">
+                    <img src="mem2.jpeg" alt="Memory" onclick="openGallery(1)">
+                    <img src="mem3.jpeg" alt="Memory" onclick="openGallery(2)">
+                    <img src="mem4.jpeg" alt="Memory" onclick="openGallery(3)">
+                    <img src="mem5.jpeg" alt="Memory" onclick="openGallery(4)">
+                    <img src="mem6.jpeg" alt="Memory" onclick="openGallery(5)">
+                    <img src="mem7.jpeg" alt="Memory" onclick="openGallery(6)">
+                    <img src="mem8.jpeg" alt="Memory" onclick="openGallery(7)">
+                    <img src="mem9.jpeg" alt="Memory" onclick="openGallery(8)">
+                    <img src="mem10.jpeg" alt="Memory" onclick="openGallery(9)">
+                    <img src="mem11.jpeg" alt="Memory" onclick="openGallery(10)">
+                    <img src="mem12.jpeg" alt="Memory" onclick="openGallery(11)">
+                    <img src="mem13.jpeg" alt="Memory" onclick="openGallery(12)">
+                    <img src="mem14.jpeg" alt="Memory" onclick="openGallery(13)">
+                    <img src="mem15.jpeg" alt="Memory" onclick="openGallery(14)">
+                </div>
+            </div>
             
         </div>
 
@@ -617,10 +624,8 @@
     <div class="lightbox-overlay" id="lightbox">
         <div class="lightbox-container">
             <button class="lb-btn lightbox-close" onclick="closeGallery()">&times;</button>
-            
             <button class="lb-btn lb-nav lb-prev" onclick="changeImage(-1)">&#10094;</button>
             <button class="lb-btn lb-nav lb-next" onclick="changeImage(1)">&#10095;</button>
-            
             <img class="lightbox-img" id="lightbox-img" src="" alt="Expanded Memory" onclick="changeImage(1)">
         </div>
     </div>
@@ -660,6 +665,8 @@
             document.getElementById("seconds").innerText = seconds.toString().padStart(2, '0');
         }
 
+        // --- Revelations ---
+
         function revealSecrets() {
             const section = document.getElementById('secret-favours');
             const btn = document.querySelector('.reveal-btn');
@@ -672,9 +679,23 @@
             }, 100);
         }
 
+        function revealMemoryLane() {
+            const grid = document.getElementById('memory-lane-grid');
+            const btn = document.getElementById('memBtn');
+            
+            grid.classList.add('visible');
+            btn.style.display = 'none'; // Hides the button after she clicks it
+            
+            setTimeout(() => {
+                grid.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        }
+
         function redeemFavour(element) {
             element.classList.add('redeemed');
         }
+
+        // --- Photobooth ---
 
         function openPhotoBooth() {
             const modal = document.getElementById('photoModal');
@@ -688,6 +709,8 @@
             document.body.style.overflow = ''; 
         }
 
+        // --- Heartfelt Footer Message ---
+
         function revealHeartfeltMessage() {
             const footer = document.getElementById('fake-footer');
             
@@ -695,16 +718,19 @@
                 footer.classList.add('unlocked');
                 footer.innerHTML = `
                     "I may have forgotten to wish you on the very first minute, baby, but I'll always make sure to be there with you every single minute and second. There will not be one time you will feel like you're away from me, or vice versa. I'm heartbroken that I hurt you in this way, but here I am trying to fix it all. I'm stupid and all of that, but I'll always love you to death no matter what happens, you have my word on it. This is for the years and months to come. I know we will be together ALWAYS, FOREVER."
-                    <span class="signature">— Yours</span>
+                    <span class="signature">— Your Chotu baby forever</span>
                 `;
+                
+                setTimeout(() => {
+                    footer.scrollIntoView({ behavior: 'smooth', block: 'end' });
+                }, 100);
             }
         }
 
-        // --- UPGRADED: Memory Lane Gallery Mode Logic ---
+        // --- Memory Lane Gallery Mode ---
         
         let currentImageIndex = 0;
         const images = [];
-        // Populate image sources array (mem1.jpeg to mem15.jpeg)
         for(let i = 1; i <= 15; i++) {
             images.push(`mem${i}.jpeg`);
         }
@@ -714,16 +740,12 @@
             const lightbox = document.getElementById('lightbox');
             const img = document.getElementById('lightbox-img');
             
-            // Set initial image
             img.src = images[currentImageIndex];
             
             lightbox.classList.add('open');
-            document.body.style.overflow = 'hidden'; // Prevents scrolling behind
+            document.body.style.overflow = 'hidden'; 
 
-            // Add keyboard support (arrows and escape)
             document.addEventListener('keydown', handleKeyboard);
-            
-            // Allow closing by clicking background
             lightbox.addEventListener('click', handleBackgroundClick);
         }
 
@@ -732,7 +754,6 @@
             lightbox.classList.remove('open');
             document.body.style.overflow = '';
             
-            // Remove event listeners to clean up
             document.removeEventListener('keydown', handleKeyboard);
             lightbox.removeEventListener('click', handleBackgroundClick);
         }
@@ -740,30 +761,26 @@
         function changeImage(direction) {
             currentImageIndex += direction;
             
-            // Loop functionality
             if (currentImageIndex >= images.length) {
-                currentImageIndex = 0; // Loop back to start
+                currentImageIndex = 0;
             } else if (currentImageIndex < 0) {
-                currentImageIndex = images.length - 1; // Loop back to end
+                currentImageIndex = images.length - 1; 
             }
             
             const img = document.getElementById('lightbox-img');
-            // Add simple fade effect via JS setting source
             img.style.opacity = 0;
             setTimeout(() => {
                 img.src = images[currentImageIndex];
                 img.style.opacity = 1;
-            }, 100); // Short delay for fade
+            }, 100); 
         }
 
-        // Helper: Close if clicking the dark overlay, not the image or buttons
         function handleBackgroundClick(e) {
             if (e.target.classList.contains('lightbox-container') || e.target.classList.contains('lightbox-overlay')) {
                 closeGallery();
             }
         }
 
-        // Helper: Keyboard navigation
         function handleKeyboard(e) {
             if (e.key === "ArrowRight") changeImage(1);
             if (e.key === "ArrowLeft") changeImage(-1);
