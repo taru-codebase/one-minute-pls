@@ -181,7 +181,6 @@
             line-height: 1.4;
         }
 
-        /* The Redeemed Stamp */
         .redeem-stamp {
             display: none;
             position: absolute;
@@ -208,7 +207,43 @@
         .coupon.redeemed .redeem-stamp {
             display: block;
         }
-        
+
+        /* --- THE FAKE FOOTER MESSAGE --- */
+        .fake-footer {
+            margin-top: 80px;
+            color: #333; 
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.8s ease;
+            padding: 20px;
+        }
+
+        .fake-footer:hover {
+            color: #666;
+        }
+
+        .fake-footer.unlocked {
+            color: #eaeaea;
+            font-size: 1.1rem;
+            font-style: italic;
+            line-height: 1.6;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 10px;
+            border-left: 3px solid #ff9eeb;
+            padding: 30px;
+            text-align: left;
+            cursor: default;
+        }
+
+        .signature {
+            color: #ff9eeb;
+            margin-top: 15px;
+            font-weight: bold;
+            text-align: right;
+            display: block;
+            font-style: normal;
+        }
+
         /* Mobile Responsiveness */
         @media (max-width: 600px) {
             .time-block {
@@ -294,6 +329,10 @@
             </div>
         </div>
 
+        <div id="fake-footer" class="fake-footer" onclick="revealHeartfeltMessage()">
+            © 2026 Our Story | Built for you.
+        </div>
+
     </div>
 
     <script>
@@ -306,22 +345,18 @@
 
             if (totalDiff < 0) return;
 
-            // Calculate total overall minutes for the highlight
             const totalMinutes = Math.floor(totalDiff / (1000 * 60));
             document.getElementById("total-minutes").innerText = totalMinutes.toLocaleString();
 
-            // Calculate exact calendar years
             let years = now.getFullYear() - start.getFullYear();
             let anniversaryThisYear = new Date(start);
             anniversaryThisYear.setFullYear(now.getFullYear());
 
-            // If the anniversary hasn't happened yet this year, subtract 1
             if (now < anniversaryThisYear) {
                 years--;
                 anniversaryThisYear.setFullYear(now.getFullYear() - 1);
             }
 
-            // Calculate remaining time after subtracting the exact years
             const remainingDiff = now.getTime() - anniversaryThisYear.getTime();
 
             const days = Math.floor(remainingDiff / (1000 * 60 * 60 * 24));
@@ -329,7 +364,6 @@
             const minutes = Math.floor((remainingDiff % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((remainingDiff % (1000 * 60)) / 1000);
 
-            // Update the HTML elements
             document.getElementById("years").innerText = years;
             document.getElementById("days").innerText = days;
             document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
@@ -337,23 +371,34 @@
             document.getElementById("seconds").innerText = seconds.toString().padStart(2, '0');
         }
 
-        // Handle the secret reveal button
         function revealSecrets() {
             const section = document.getElementById('secret-favours');
             const btn = document.querySelector('.reveal-btn');
             
             section.classList.add('visible');
-            btn.style.display = 'none'; // Hides the "wait, there's more..." text after clicking
+            btn.style.display = 'none'; 
             
-            // Smoothly scroll down so she sees it
             setTimeout(() => {
                 section.scrollIntoView({ behavior: 'smooth' });
             }, 100);
         }
 
-        // Handle the coupon clicking
         function redeemFavour(element) {
             element.classList.add('redeemed');
+        }
+
+        // New function to handle the hidden footer message
+        function revealHeartfeltMessage() {
+            const footer = document.getElementById('fake-footer');
+            
+            // Only run this once
+            if (!footer.classList.contains('unlocked')) {
+                footer.classList.add('unlocked');
+                footer.innerHTML = `
+                    "I may have forgotten to wish you on the very first minute, baby, but I'll always make sure to be there with you every single minute and second. There will not be one time you will feel like you're away from me, or vice versa. I'm heartbroken that I hurt you in this way, but here I am trying to fix it all. I'm stupid and all of that, but I'll always love you to death no matter what happens, you have my word on it. This is for the years and months to come. I know we will be together ALWAYS, FOREVER."
+                    <span class="signature">— Yours</span>
+                `;
+            }
         }
 
         updateCounter();
