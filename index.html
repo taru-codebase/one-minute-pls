@@ -10,18 +10,18 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Courier New', Courier, monospace; /* Typewriter feel */
+            font-family: 'Courier New', Courier, monospace;
         }
         
         body {
-            background-color: #0d0d12; /* Deep pensive dark background */
+            background-color: #0d0d12;
             color: #eaeaea;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             text-align: center;
-            padding: 20px;
+            padding: 40px 20px;
         }
 
         .container {
@@ -71,7 +71,7 @@
             display: block;
             font-size: 3.5rem;
             font-weight: bold;
-            color: #e0aaff; /* Subtle neon purple/pink */
+            color: #e0aaff;
             text-shadow: 0 0 10px rgba(224, 170, 255, 0.4);
         }
 
@@ -89,6 +89,7 @@
             margin-top: 40px;
             padding-top: 40px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
         }
 
         .total-minutes-box p {
@@ -102,11 +103,84 @@
             font-size: 2rem;
             text-shadow: 0 0 15px rgba(255, 158, 235, 0.5);
         }
+
+        /* --- NEW: Interactive Favours/Coupons --- */
+        .favours-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #fff;
+            font-weight: normal;
+        }
+
+        .coupon-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .coupon {
+            background: #15151e;
+            border: 1px dashed #e0aaff;
+            border-radius: 8px;
+            padding: 25px 20px;
+            width: 230px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .coupon:hover {
+            background: #1a1a25;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(224, 170, 255, 0.1);
+        }
+
+        .coupon h3 {
+            color: #ff9eeb;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .coupon p {
+            color: #aaa;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        /* The Redeemed Stamp */
+        .redeem-stamp {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-20deg);
+            color: #ff4757;
+            border: 3px solid #ff4757;
+            padding: 5px 15px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            border-radius: 5px;
+            background: rgba(21, 21, 30, 0.9);
+            box-shadow: 0 0 10px rgba(255, 71, 87, 0.3);
+        }
+
+        .coupon.redeemed {
+            opacity: 0.6;
+            pointer-events: none;
+            border-color: #444;
+        }
+
+        .coupon.redeemed .redeem-stamp {
+            display: block;
+        }
         
         /* Mobile Responsiveness */
         @media (max-width: 600px) {
             .time-block {
-                min-width: 45%; /* Two per row on small screens */
+                min-width: 45%;
                 padding: 15px;
             }
             .time-value {
@@ -114,6 +188,10 @@
             }
             h1 {
                 font-size: 1.8rem;
+            }
+            .coupon {
+                width: 100%;
+                max-width: 300px;
             }
         }
     </style>
@@ -150,31 +228,53 @@
         <div class="total-minutes-box">
             <p>We've been building our story for exactly <br><span id="total-minutes" class="highlight-minute">0</span><br> total minutes.</p>
         </div>
+
+        <div class="favours-section">
+            <h2>Tap a ticket to redeem...</h2>
+            <div class="coupon-grid">
+                
+                <div class="coupon" onclick="redeemFavour(this)">
+                    <h3>Movie Night Veto</h3>
+                    <p>Good for one absolute, no-questions-asked veto on whatever movie I suggest we watch.</p>
+                    <div class="redeem-stamp">REDEEMED</div>
+                </div>
+
+                <div class="coupon" onclick="redeemFavour(this)">
+                    <h3>Aux Cable Surrender</h3>
+                    <p>You get full control of the playlist. I promise, no driving basslines or 80s synths for the whole day.</p>
+                    <div class="redeem-stamp">REDEEMED</div>
+                </div>
+
+                <div class="coupon" onclick="redeemFavour(this)">
+                    <h3>Dog Duty Shift</h3>
+                    <p>I will take the early morning shift to go check in on our favorite neighborhood street dog.</p>
+                    <div class="redeem-stamp">REDEEMED</div>
+                </div>
+
+            </div>
+        </div>
+
     </div>
 
     <script>
-        // Set the exact start date: April 30, 2024 at 12:00 PM
+        // Set the exact start date: April 30, 2024 at Midnight
         const startDate = new Date('April 30, 2024 00:00:00').getTime();
 
         function updateCounter() {
             const now = new Date().getTime();
             const difference = now - startDate;
 
-            if (difference < 0) return; // Prevent errors if checking before the date
+            if (difference < 0) return;
 
-            // Calculate total overall minutes for the highlight
             const totalMinutes = Math.floor(difference / (1000 * 60));
             document.getElementById("total-minutes").innerText = totalMinutes.toLocaleString();
 
-            // Calculate exact breakdown
-            // Using 365.25 to account for leap years
             const years = Math.floor(difference / (1000 * 60 * 60 * 24 * 365.25));
             const days = Math.floor((difference % (1000 * 60 * 60 * 24 * 365.25)) / (1000 * 60 * 60 * 24));
             const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-            // Update the HTML elements and ensure 2-digit formatting for time
             document.getElementById("years").innerText = years;
             document.getElementById("days").innerText = days;
             document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
@@ -182,7 +282,11 @@
             document.getElementById("seconds").innerText = seconds.toString().padStart(2, '0');
         }
 
-        // Run once immediately to avoid 1-second delay, then set interval
+        // New function to handle the coupon clicking
+        function redeemFavour(element) {
+            element.classList.add('redeemed');
+        }
+
         updateCounter();
         setInterval(updateCounter, 1000);
     </script>
