@@ -235,19 +235,25 @@
                 
                 <div class="coupon" onclick="redeemFavour(this)">
                     <h3>Movie Night Veto</h3>
-                    <p>Good for one absolute, no-questions-asked veto on whatever movie I suggest we watch.</p>
+                    <p>You get absolute dictatorship over our next virtual movie night. I will not complain, even if we are watching the most chaotic reality TV show ever made.</p>
                     <div class="redeem-stamp">REDEEMED</div>
                 </div>
 
                 <div class="coupon" onclick="redeemFavour(this)">
-                    <h3>Aux Cable Surrender</h3>
-                    <p>You get full control of the playlist. I promise, no driving basslines or 80s synths for the whole day.</p>
+                    <h3>Total Surrender</h3>
+                    <p>You get full control of the day whatever you say I do.</p>
                     <div class="redeem-stamp">REDEEMED</div>
                 </div>
 
                 <div class="coupon" onclick="redeemFavour(this)">
-                    <h3>Dog Duty Shift</h3>
-                    <p>I will take the early morning shift to go check in on our favorite neighborhood street dog.</p>
+                    <h3>Surprise Delivery</h3>
+                    <p>Cash this in and I will order a surprise meal/dessert to your door. You get zero input. Let's hope I remember your exact spice tolerance.</p>
+                    <div class="redeem-stamp">REDEEMED</div>
+                </div>
+
+                <div class="coupon" onclick="redeemFavour(this)">
+                    <h3>The Instant "You're Right" Card</h3>
+                    <p>If we are bickering over a text miscommunication or something stupid, play this. I have to instantly concede, say "You are right, your brain is massive," and drop it entirely.</p>
                     <div class="redeem-stamp">REDEEMED</div>
                 </div>
 
@@ -258,23 +264,38 @@
 
     <script>
         // Set the exact start date: April 30, 2024 at Midnight
-        const startDate = new Date('April 30, 2024 00:00:00').getTime();
+        const start = new Date('April 30, 2024 00:00:00');
 
         function updateCounter() {
-            const now = new Date().getTime();
-            const difference = now - startDate;
+            const now = new Date();
+            const totalDiff = now.getTime() - start.getTime();
 
-            if (difference < 0) return;
+            if (totalDiff < 0) return;
 
-            const totalMinutes = Math.floor(difference / (1000 * 60));
+            // Calculate total overall minutes for the highlight
+            const totalMinutes = Math.floor(totalDiff / (1000 * 60));
             document.getElementById("total-minutes").innerText = totalMinutes.toLocaleString();
 
-            const years = Math.floor(difference / (1000 * 60 * 60 * 24 * 365.25));
-            const days = Math.floor((difference % (1000 * 60 * 60 * 24 * 365.25)) / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+            // Calculate exact calendar years
+            let years = now.getFullYear() - start.getFullYear();
+            let anniversaryThisYear = new Date(start);
+            anniversaryThisYear.setFullYear(now.getFullYear());
 
+            // If the anniversary hasn't happened yet this year, subtract 1
+            if (now < anniversaryThisYear) {
+                years--;
+                anniversaryThisYear.setFullYear(now.getFullYear() - 1);
+            }
+
+            // Calculate remaining time after subtracting the exact years
+            const remainingDiff = now.getTime() - anniversaryThisYear.getTime();
+
+            const days = Math.floor(remainingDiff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((remainingDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((remainingDiff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((remainingDiff % (1000 * 60)) / 1000);
+
+            // Update the HTML elements
             document.getElementById("years").innerText = years;
             document.getElementById("days").innerText = days;
             document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
@@ -282,7 +303,7 @@
             document.getElementById("seconds").innerText = seconds.toString().padStart(2, '0');
         }
 
-        // New function to handle the coupon clicking
+        // Handle the coupon clicking
         function redeemFavour(element) {
             element.classList.add('redeemed');
         }
